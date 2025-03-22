@@ -1,0 +1,5 @@
+# SAM default build folder
+.aws-sam/
+
+# SAM config file
+samconfig.toml
