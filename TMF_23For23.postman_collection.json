@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "2bfe09a2-a694-4409-b395-3c389389ced5",
+		"name": "TMF 23 For 23 App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9238202"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Initiate Auth",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-amz-json-1.1"
+							},
+							{
+								"key": "X-Amz-Target",
+								"value": "AWSCognitoIdentityProviderService.InitiateAuth"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"AuthFlow\": \"USER_PASSWORD_AUTH\",\n    \"ClientId\": \"{{mobileAppClientId}}\",\n    \"AuthParameters\": {\n        \"USERNAME\": \"{{testUserEmail}}\",\n        \"PASSWORD\": \"{{testUserPassword}}\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://cognito-idp.{{awsRegion}}.amazonaws.com/{{userPoolId}}",
+							"protocol": "https",
+							"host": [
+								"cognito-idp",
+								"{{awsRegion}}",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"{{userPoolId}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-amz-json-1.1"
+							},
+							{
+								"key": "User-Agent",
+								"value": "insomnia/11.0.0"
+							},
+							{
+								"key": "X-Amz-Target",
+								"value": "AWSCognitoIdentityProviderService.SignUp"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ClientId\": \"{{mobileAppClientId}}\",\n    \"Username\": \"{{testUserEmail}}\",\n    \"Password\": \"{{testUserPassword}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://cognito-idp.{{awsRegion}}.amazonaws.com/{{userPoolId}}",
+							"protocol": "https",
+							"host": [
+								"cognito-idp",
+								"{{awsRegion}}",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"{{userPoolId}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "testUserEmail",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "testUserPassword",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "mobileAppClientId",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "awsRegion",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "userPoolId",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

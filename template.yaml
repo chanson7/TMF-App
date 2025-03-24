@@ -8,26 +8,25 @@ Globals:
     Handler: index.handler
     Environment:
       Variables:
+        null
 
 Resources:
   UserPool:
     Type: AWS::Cognito::UserPool
     Properties:
-      UserPoolName: !Sub ${AWS::StackName}-Players
+      UserPoolName: !Sub ${AWS::StackName}-Users
       UsernameAttributes:
         - email
       AdminCreateUserConfig:
         AllowAdminCreateUserOnly: false
-      # AutoVerifiedAttributes:
-      #   - email
       Policies:
         PasswordPolicy:
           MinimumLength: 10
-  
+
   MobileAppClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
-      ClientName: AppClient
+      ClientName: MobileAppClient
       GenerateSecret: false
       UserPoolId: !Ref UserPool
       ExplicitAuthFlows:
@@ -94,7 +93,7 @@ Resources:
     Properties:
       RoleName: !Sub ${AWS::StackName}LoggingRole
       AssumeRolePolicyDocument:
-        Version: "2012-10-17"
+        Version: '2012-10-17'
         Statement:
           - Effect: Allow
             Principal:
@@ -105,7 +104,7 @@ Resources:
       Policies:
         - PolicyName: 23For23LoggingPolicy
           PolicyDocument:
-            Version: "2012-10-17"
+            Version: '2012-10-17'
             Statement:
               - Effect: Allow
                 Action:
