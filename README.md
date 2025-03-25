@@ -30,7 +30,16 @@ This project contains all required configuration, code, & assets used in the "23
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+![architecture-diagram-url]
+
+1. User sign up, authentication, and token refresh takes place directly between the mobile application and AWS Cognito.
+2. Upon new user sign up, Cognito sends an account verification email to the user.
+3. Users with verified email addresses must create a profile. User profile data is saved to a DynamoDB record, and their profile image is saved to S3.
+4. Application functionality through the mobile client is conducted through GraphQL requests where the server is hosted on AppSync.
+
+
 ### Built With
+
 * [![graphql]][graphql-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -43,6 +52,7 @@ This project contains all required configuration, code, & assets used in the "23
 An [AWS account][aws-new-account-url] is required in order to run the necessary services for this application.
 
 **WARNING:** This project provisions AWS resources which may incur costs. Please ensure you review the [AWS pricing][aws-pricing-url] for the services used and monitor your account to avoid unexpected charges.
+
 1. Install the [SAM CLI][sam-cli-url] 
 2. Clone the project
 ```bash
@@ -90,3 +100,4 @@ An [AWS account][aws-new-account-url] is required in order to run the necessary 
 
 [postman-collection-url]: https://github.com/chanson7/TMF-App/blob/main/TMF_23For23.postman_collection.json
 [sam-template-url]: https://github.com/chanson7/TMF-App/blob/main/template.yaml
+[architecture-diagram-url]: https://github.com/chanson7/TMF-App/blob/main/TMF_23For23_Architecture.drawio.svg
