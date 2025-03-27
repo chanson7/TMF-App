@@ -13,6 +13,7 @@ This project contains all required configuration, code, & assets used in the "23
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#architecture-diagram">Architecture Diagram</a></li>
       </ul>
     </li>
     <li>
@@ -30,13 +31,14 @@ This project contains all required configuration, code, & assets used in the "23
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+### Architecture Diagram
+
 ![architecture-diagram-url]
 
 1. User sign up, authentication, and token refresh takes place directly between the mobile application and AWS Cognito.
 2. Upon new user sign up, Cognito sends an account verification email to the user.
 3. Users with verified email addresses must create a profile. User profile data is saved to a DynamoDB record, and their profile image is saved to S3.
 4. Application functionality through the mobile client is conducted through GraphQL requests where the server is hosted on AppSync.
-
 
 ### Built With
 
