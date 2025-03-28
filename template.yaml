@@ -84,27 +84,14 @@ Resources:
   CreateWorkoutResolver:
     Type: AWS::AppSync::Resolver
     DependsOn:
-      - GraphQLSchema 
+      - GraphQLSchema
     Properties:
       ApiId: !GetAtt RealtimeAPI.ApiId
       TypeName: Mutation
       FieldName: createWorkout
       DataSourceName: !GetAtt DataTableSource.Name
-      RequestMappingTemplate: |
-        {
-          "version": "2017-02-28",
-          "operation": "PutItem",
-          "key": {
-            "PK": $util.dynamodb.toDynamoDBJson("USER#$ctx.identity.sub"),
-            "SK": $util.dynamodb.toDynamoDBJson("WORKOUT#$util.autoId()")
-          },
-          "attributeValues": {
-            "description": $util.dynamodb.toDynamoDBJson($ctx.args.description),
-            "duration": $util.dynamodb.toDynamoDBJson($ctx.args.duration),
-            "timestamp": $util.dynamodb.toDynamoDBJson($util.time.nowISO8601())
-          }
-        }
-      ResponseMappingTemplate: $util.toJson($ctx.result)
+      RequestMappingTemplateS3Location: ./src/resolvers/createWorkout/request.vtl
+      ResponseMappingTemplateS3Location: ./src/resolvers/createWorkout/response.vtl
 
   DataTableSource:
     Type: AWS::AppSync::DataSource

@@ -26,7 +26,7 @@ type Workout {
     # category: WorkoutCategory!
     # imageUrl: String!
     duration: Int!
-    description: String!
+    description: String
     timestamp: String!
     # likes: [User!]!
 }
@@ -46,23 +46,23 @@ type Query {
 }
 
 type Mutation {
-    createUser(name: String!, email: String!): User
-    createWorkout(description: String!, duration: Int!): Workout
-    updateUser(name: String, email: String, isPublic: Boolean): User
-    updateWorkout(id: ID!, imageUrl: String, description: String): Workout
-    deleteUser(id: ID!): User
-    deleteWorkout(id: ID!): Workout
-    sendFriendRequest(userId: ID!): User
-    acceptFriendRequest(userId: ID!): User
-    rejectFriendRequest(userId: ID!): User
-    removeFriend(userId: ID!): User
-    blockUser(blockedUserId: ID!): User
-    unblockUser(blockedUserId: ID!): User
-    likeWorkout(workoutId: ID!): Workout
-    unlikeWorkout(workoutId: ID!): Workout
+    # createUser(name: String!, email: String!): User
+    createWorkout(description: String, duration: Int!): Workout
+    # updateUser(name: String, email: String, isPublic: Boolean): User
+    # updateWorkout(id: ID!, imageUrl: String, description: String): Workout
+    # deleteUser(id: ID!): User
+    # deleteWorkout(id: ID!): Workout
+    # sendFriendRequest(userId: ID!): User
+    # acceptFriendRequest(userId: ID!): User
+    # rejectFriendRequest(userId: ID!): User
+    # removeFriend(userId: ID!): User
+    # blockUser(blockedUserId: ID!): User
+    # unblockUser(blockedUserId: ID!): User
+    # likeWorkout(workoutId: ID!): Workout
+    # unlikeWorkout(workoutId: ID!): Workout
     #admin only
-    banUser(userId: ID!): User
-    unbanUser(userId: ID!): User
+    # banUser(userId: ID!): User
+    # unbanUser(userId: ID!): User
 }
 
 type Subscription {
