@@ -11,7 +11,7 @@ type User {
     friendRequests: [User!]!
     blockedUsers: [User!]!
     badges: [Badge!]!
-    isBanned: Boolean! #TODO is this necessary?
+    isBanned: Boolean! #TODO is this necessary?.. Can Cognito handle this?
 }
 
 type Badge {
@@ -22,14 +22,13 @@ type Badge {
 }
 
 type Workout {
-    id: ID!
-    user: User!
-    category: WorkoutCategory!
-    imageUrl: String!
+    # user: User!
+    # category: WorkoutCategory!
+    # imageUrl: String!
     duration: Int!
     description: String!
     timestamp: String!
-    likes: [User!]!
+    # likes: [User!]!
 }
 
 enum WorkoutCategory {
@@ -43,13 +42,13 @@ type Query {
     profile(id: ID!): User
     workout(id: ID!): Workout
     feed(userId: ID!): [Workout!]!
-    leaderboard: [User!]!
+    #TODO leaderboard: [User!]!
 }
 
 type Mutation {
     createUser(name: String!, email: String!): User
-    createWorkout(userId: ID!, imageUrl: String!, description: String!, date: String!): Workout
-    updateUser(id: ID!, name: String, email: String, isPublic: Boolean): User
+    createWorkout(description: String!, duration: Int!): Workout
+    updateUser(name: String, email: String, isPublic: Boolean): User
     updateWorkout(id: ID!, imageUrl: String, description: String): Workout
     deleteUser(id: ID!): User
     deleteWorkout(id: ID!): Workout

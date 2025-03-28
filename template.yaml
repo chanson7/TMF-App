@@ -6,9 +6,8 @@ Globals:
   Function:
     # Runtime: nodejs20.x
     Handler: index.handler
-    Environment:
-      Variables:
-        null
+    # Environment:
+    #   Variables:
 
 Resources:
   UserPool:
@@ -81,6 +80,69 @@ Resources:
     Properties:
       ApiId: !GetAtt RealtimeAPI.ApiId
       DefinitionS3Location: ./src/schema.graphql
+
+  CreateWorkoutResolver:
+    Type: AWS::AppSync::Resolver
+    DependsOn:
+      - GraphQLSchema 
+    Properties:
+      ApiId: !GetAtt RealtimeAPI.ApiId
+      TypeName: Mutation
+      FieldName: createWorkout
+      DataSourceName: !GetAtt DataTableSource.Name
+      RequestMappingTemplate: |
+        {
+          "version": "2017-02-28",
+          "operation": "PutItem",
+          "key": {
+            "PK": $util.dynamodb.toDynamoDBJson("USER#$ctx.identity.sub"),
+            "SK": $util.dynamodb.toDynamoDBJson("WORKOUT#$util.autoId()")
+          },
+          "attributeValues": {
+            "description": $util.dynamodb.toDynamoDBJson($ctx.args.description),
+            "duration": $util.dynamodb.toDynamoDBJson($ctx.args.duration),
+            "timestamp": $util.dynamodb.toDynamoDBJson($util.time.nowISO8601())
+          }
+        }
+      ResponseMappingTemplate: $util.toJson($ctx.result)
+
+  DataTableSource:
+    Type: AWS::AppSync::DataSource
+    Properties:
+      ServiceRoleArn: !GetAtt DataTableSourceRole.Arn
+      Type: AMAZON_DYNAMODB
+      Name: DataTableSource
+      ApiId: !GetAtt RealtimeAPI.ApiId
+      DynamoDBConfig:
+        AwsRegion: !Ref AWS::Region
+        TableName: !Ref DataTable
+
+  DataTableSourceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub ${AWS::StackName}-DataTableSourceRole
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action: sts:AssumeRole
+            Principal:
+              Service: appsync.amazonaws.com
+      Policies:
+        - PolicyName: DataTableSourcePolicy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:DeleteItem
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                  - dynamodb:Query
+                  - dynamodb:Scan
+                  - dynamodb:UpdateItem
+                Resource:
+                  - !GetAtt DataTable.Arn
 
   CloudwatchLogGroup:
     Type: AWS::Logs::LogGroup
