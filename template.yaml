@@ -163,3 +163,46 @@ Resources:
                   - logs:DescribeLogGroups
                   - logs:DescribeLogStreams
                 Resource: !Sub arn:aws:logs:${AWS::Region}:${AWS::AccountId}:*
+
+  
+  23For23DeveloperPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: 23for23DeveloperPolicy
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - dynamodb:ListTables
+            Resource: !Sub arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/*
+          - Effect: Allow
+            Action:
+              - dynamodb:BatchGet*
+              - dynamodb:Describe*
+              - dynamodb:DeleteItem
+              - dynamodb:Get*
+              - dynamodb:PutItem
+              - dynamodb:Query
+              - dynamodb:Scan
+              - dynamodb:UpdateItem
+            Resource:
+              - !GetAtt DataTable.Arn
+          - Effect: Allow
+            Action:
+              - appsync:List*
+            Resource:
+              - !Sub arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:*
+          - Effect: Allow
+            Action:
+              - appsync:Update*
+              - appsync:Get*
+            Resource:
+              - !Sub arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:/v1/apis/${RealtimeAPI.ApiId}/*
+
+  23For23Developers:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: 23For23-Developers
+      ManagedPolicyArns:
+        - !Ref 23For23DeveloperPolicy
