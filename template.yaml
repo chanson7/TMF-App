@@ -90,8 +90,44 @@ Resources:
       TypeName: Mutation
       FieldName: createWorkout
       DataSourceName: !GetAtt DataTableSource.Name
-      RequestMappingTemplateS3Location: ./src/resolvers/createWorkout/request.vtl
-      ResponseMappingTemplateS3Location: ./src/resolvers/createWorkout/response.vtl
+      RequestMappingTemplateS3Location: ./src/resolvers/Mutation/createWorkout/request.vtl
+      ResponseMappingTemplateS3Location: ./src/resolvers/Mutation/createWorkout/response.vtl
+
+  CreateUserResolver:
+    Type: AWS::AppSync::Resolver
+    DependsOn:
+      - GraphQLSchema
+    Properties:
+      ApiId: !GetAtt RealtimeAPI.ApiId
+      TypeName: Mutation
+      FieldName: createUser
+      DataSourceName: !GetAtt DataTableSource.Name
+      RequestMappingTemplateS3Location: ./src/resolvers/Mutation/createUser/request.vtl
+      ResponseMappingTemplateS3Location: ./src/resolvers/Mutation/createUser/response.vtl
+
+  QueryFeedResolver:
+    Type: AWS::AppSync::Resolver
+    DependsOn:
+      - GraphQLSchema
+    Properties:
+      ApiId: !GetAtt RealtimeAPI.ApiId
+      TypeName: Query
+      FieldName: feed
+      DataSourceName: !GetAtt DataTableSource.Name
+      RequestMappingTemplateS3Location: ./src/resolvers/Query/feed/request.vtl
+      ResponseMappingTemplateS3Location: ./src/resolvers/Query/feed/response.vtl
+
+  QueryProfileResolver:
+    Type: AWS::AppSync::Resolver
+    DependsOn:
+      - GraphQLSchema
+    Properties:
+      ApiId: !GetAtt RealtimeAPI.ApiId
+      TypeName: Query
+      FieldName: profile
+      DataSourceName: !GetAtt DataTableSource.Name
+      RequestMappingTemplateS3Location: ./src/resolvers/Query/profile/request.vtl
+      ResponseMappingTemplateS3Location: ./src/resolvers/Query/profile/response.vtl
 
   DataTableSource:
     Type: AWS::AppSync::DataSource
@@ -197,6 +233,7 @@ Resources:
             Action:
               - appsync:Update*
               - appsync:Get*
+              - appSync:StartSchemaCreation
             Resource:
               - !Sub arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:/v1/apis/${RealtimeAPI.ApiId}/*
 

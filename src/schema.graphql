@@ -1,23 +1,22 @@
 type User {
     id: ID!
-    name: String!
-    profileImageUrl: String!
+    firstName: String!
+    lastName: String!
     email: String!
-    isPublic: Boolean!
-    rank: Int!
-    totalMinutes: Int!
-    workouts: [Workout!]!
-    friends: [User!]!
-    friendRequests: [User!]!
-    blockedUsers: [User!]!
-    badges: [Badge!]!
-    isBanned: Boolean! #TODO is this necessary?.. Can Cognito handle this?
+    # profileImageUrl: String!
+    # isPublic: Boolean!
+    # rank: Int!
+    # totalMinutes: Int!
+    # workouts: [Workout!]!
+    # friends: [User!]!
+    # friendRequests: [User!]!
+    # blockedUsers: [User!]!
+    # badges: [Badge!]!
 }
 
 type Badge {
     id: ID!
     name: String!
-    iconUrl: String!
     description: String!
 }
 
@@ -37,16 +36,15 @@ enum WorkoutCategory {
     FLEXIBILITY
     SPORTS
 }
-
 type Query {
     profile(id: ID!): User
     workout(id: ID!): Workout
-    feed(userId: ID!): [Workout!]!
+    feed: [Workout!]!
     #TODO leaderboard: [User!]!
 }
 
 type Mutation {
-    # createUser(name: String!, email: String!): User
+    createUser(firstName: String!, lastName: String!, email: String!): User
     createWorkout(description: String, duration: Int!): Workout
     # updateUser(name: String, email: String, isPublic: Boolean): User
     # updateWorkout(id: ID!, imageUrl: String, description: String): Workout
@@ -60,7 +58,7 @@ type Mutation {
     # unblockUser(blockedUserId: ID!): User
     # likeWorkout(workoutId: ID!): Workout
     # unlikeWorkout(workoutId: ID!): Workout
-    #admin only
+    # ---admin only mutations---
     # banUser(userId: ID!): User
     # unbanUser(userId: ID!): User
 }
