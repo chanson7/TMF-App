@@ -1,13 +1,17 @@
+#set($today = $util.time.nowFormatted("yyyy-MM-dd"))
+
 {
   "version": "2017-02-28",
   "operation": "PutItem",
   "key": {
-    "PK": $util.dynamodb.toDynamoDBJson("USER#$ctx.identity.sub"),
-    "SK": $util.dynamodb.toDynamoDBJson("WORKOUT#$util.autoId()")
+    "PK": $util.dynamodb.toDynamoDBJson("PUBLIC#$today"),
+    "SK": $util.dynamodb.toDynamoDBJson("USER#$ctx.identity.sub")
   },
   "attributeValues": {
+    "SK1": $util.dynamodb.toDynamoDBJson("WORKOUT#$util.autoId()"),
     "description": $util.dynamodb.toDynamoDBJson($ctx.args.description),
     "duration": $util.dynamodb.toDynamoDBJson($ctx.args.duration),
-    "timestamp": $util.dynamodb.toDynamoDBJson($util.time.nowISO8601())
+    "timestamp": $util.dynamodb.toDynamoDBJson($util.time.nowISO8601()),
+    "user": $util.dynamodb.toDynamoDBJson("USER#$ctx.identity.sub")
   }
 }

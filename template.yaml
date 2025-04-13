@@ -105,29 +105,29 @@ Resources:
       RequestMappingTemplateS3Location: ./src/resolvers/Mutation/createUser/request.vtl
       ResponseMappingTemplateS3Location: ./src/resolvers/Mutation/createUser/response.vtl
 
-  QueryFeedResolver:
+  QueryUserResolver:
     Type: AWS::AppSync::Resolver
     DependsOn:
       - GraphQLSchema
     Properties:
       ApiId: !GetAtt RealtimeAPI.ApiId
       TypeName: Query
-      FieldName: feed
+      FieldName: user
       DataSourceName: !GetAtt DataTableSource.Name
-      RequestMappingTemplateS3Location: ./src/resolvers/Query/feed/request.vtl
-      ResponseMappingTemplateS3Location: ./src/resolvers/Query/feed/response.vtl
+      RequestMappingTemplateS3Location: ./src/resolvers/Query/user/request.vtl
+      ResponseMappingTemplateS3Location: ./src/resolvers/Query/user/response.vtl
 
-  QueryProfileResolver:
+  WorkoutUserResolver: 
     Type: AWS::AppSync::Resolver
     DependsOn:
       - GraphQLSchema
     Properties:
       ApiId: !GetAtt RealtimeAPI.ApiId
-      TypeName: Query
-      FieldName: profile
+      TypeName: Workout
+      FieldName: user
       DataSourceName: !GetAtt DataTableSource.Name
-      RequestMappingTemplateS3Location: ./src/resolvers/Query/profile/request.vtl
-      ResponseMappingTemplateS3Location: ./src/resolvers/Query/profile/response.vtl
+      RequestMappingTemplateS3Location: ./src/resolvers/Workout/user/request.vtl
+      ResponseMappingTemplateS3Location: ./src/resolvers/Workout/user/response.vtl
 
   DataTableSource:
     Type: AWS::AppSync::DataSource

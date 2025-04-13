@@ -1,33 +1,56 @@
+type Annoouncement {
+    id: ID!
+    user: User!
+    text: String!
+    timestamp: String!
+}
+
 type User {
     id: ID!
     firstName: String!
     lastName: String!
     email: String!
+    isPrivate: Boolean!    
+    workouts: [Workout!]!
+    badges: [Badge!]!
     # profileImageUrl: String!
-    # isPublic: Boolean!
-    # rank: Int!
-    # totalMinutes: Int!
-    # workouts: [Workout!]!
-    # friends: [User!]!
-    # friendRequests: [User!]!
     # blockedUsers: [User!]!
-    # badges: [Badge!]!
 }
 
 type Badge {
     id: ID!
-    name: String!
+    challenge: Challenge!
+    user: User!
+    timestamp: String!
     description: String!
 }
 
+type Challenge {
+    id: ID!
+    startDate: String!
+    endDate: String!
+    participants: [User!]!
+    badgesEarned: Int
+}
+
 type Workout {
-    # user: User!
-    # category: WorkoutCategory!
-    # imageUrl: String!
-    duration: Int!
+    id: ID!
+    user: User!
+    category: WorkoutCategory!
+    challengeId: ID
+    durationMinutes: Int!
     description: String
     timestamp: String!
-    # likes: [User!]!
+    likes: [User!]!
+    comments: [Comment!]!
+}
+
+type Comment {
+    id: ID!
+    user: User!
+    workout: Workout!
+    text: String!
+    timestamp: String!
 }
 
 enum WorkoutCategory {
@@ -36,36 +59,29 @@ enum WorkoutCategory {
     FLEXIBILITY
     SPORTS
 }
+
 type Query {
-    profile(id: ID!): User
-    workout(id: ID!): Workout
-    feed: [Workout!]!
-    #TODO leaderboard: [User!]!
+    user(id: ID!): User
+    workout(challengeId: ID!, workoutId: ID!): Workout
+    leaderboard(challengeId: ID!): [User!]!
 }
 
 type Mutation {
     createUser(firstName: String!, lastName: String!, email: String!): User
     createWorkout(description: String, duration: Int!): Workout
-    # updateUser(name: String, email: String, isPublic: Boolean): User
-    # updateWorkout(id: ID!, imageUrl: String, description: String): Workout
-    # deleteUser(id: ID!): User
-    # deleteWorkout(id: ID!): Workout
-    # sendFriendRequest(userId: ID!): User
-    # acceptFriendRequest(userId: ID!): User
-    # rejectFriendRequest(userId: ID!): User
-    # removeFriend(userId: ID!): User
-    # blockUser(blockedUserId: ID!): User
-    # unblockUser(blockedUserId: ID!): User
-    # likeWorkout(workoutId: ID!): Workout
-    # unlikeWorkout(workoutId: ID!): Workout
-    # ---admin only mutations---
-    # banUser(userId: ID!): User
-    # unbanUser(userId: ID!): User
+    createComment(workoutId: ID!, text: String!): Comment
+    deleteComment(commentId: ID!): Comment
+    likeWorkout(workoutId: ID!): Workout
+    unlikeWorkout(workoutId: ID!): Workout
+    # admin mutations
+    adminCreateChallenge: Challenge
+    adminBlockUser(userId: ID!): User
+    adminUnblockUser(userId: ID!): User
 }
 
 type Subscription {
     feedUpdated: [Workout!]!
-    friendRequestReceived: User
-    friendRequestAccepted: User
-    workoutLiked: Workout
+    # friendRequestReceived: User
+    # friendRequestAccepted: User
+    # workoutLiked: Workout
 }
