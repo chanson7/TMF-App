@@ -3,7 +3,7 @@
 
 # TMF | Mobile App Back End Services
 
-This project contains configuration of the back-end services supporting the [Theodore Madison Foundation's][tmf-url] mobile application.
+This project contains configuration of back end services used by the [Theodore Madison Foundation's][tmf-url] mobile application.
 
 <!-- TABLE OF CONTENTS -->
 <details>
