@@ -1,4 +1,4 @@
-type Annoouncement {
+type Announcement {
     id: ID!
     user: User!
     text: String!
@@ -9,8 +9,7 @@ type User {
     id: ID!
     firstName: String!
     lastName: String!
-    email: String!
-    isPrivate: Boolean!    
+    isPrivate: Boolean!
     workouts: [Workout!]!
     badges: [Badge!]!
     # profileImageUrl: String!
@@ -37,10 +36,10 @@ type Workout {
     id: ID!
     user: User!
     category: WorkoutCategory!
+    timestamp: String!
     challengeId: ID
     durationMinutes: Int!
     description: String
-    timestamp: String!
     likes: [User!]!
     comments: [Comment!]!
 }
@@ -67,7 +66,7 @@ type Query {
 }
 
 type Mutation {
-    createUser(firstName: String!, lastName: String!, email: String!): User
+    createUser(firstName: String!, lastName: String!): User
     createWorkout(description: String, duration: Int!): Workout
     createComment(workoutId: ID!, text: String!): Comment
     deleteComment(commentId: ID!): Comment
@@ -81,7 +80,5 @@ type Mutation {
 
 type Subscription {
     feedUpdated: [Workout!]!
-    # friendRequestReceived: User
-    # friendRequestAccepted: User
     # workoutLiked: Workout
 }

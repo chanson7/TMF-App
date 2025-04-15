@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Serverless Resources for the 23 For 23 Mobile App
+Description: Serverless Resources for the TMF Mobile App
 
 Globals:
   Function:
@@ -117,7 +117,7 @@ Resources:
       RequestMappingTemplateS3Location: ./src/resolvers/Query/user/request.vtl
       ResponseMappingTemplateS3Location: ./src/resolvers/Query/user/response.vtl
 
-  WorkoutUserResolver: 
+  WorkoutUserResolver:
     Type: AWS::AppSync::Resolver
     DependsOn:
       - GraphQLSchema
@@ -187,7 +187,7 @@ Resources:
             Action:
               - sts:AssumeRole
       Policies:
-        - PolicyName: 23For23LoggingPolicy
+        - PolicyName: TMFAppLoggingPolicy
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
@@ -200,11 +200,10 @@ Resources:
                   - logs:DescribeLogStreams
                 Resource: !Sub arn:aws:logs:${AWS::Region}:${AWS::AccountId}:*
 
-  
-  23For23DeveloperPolicy:
+  TMFAppDeveloperPolicy:
     Type: AWS::IAM::ManagedPolicy
     Properties:
-      ManagedPolicyName: 23for23DeveloperPolicy
+      ManagedPolicyName: TMFAppDeveloperPolicy
       PolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -234,12 +233,28 @@ Resources:
               - appsync:Update*
               - appsync:Get*
               - appSync:StartSchemaCreation
+              - appsync:Invoke
             Resource:
               - !Sub arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:/v1/apis/${RealtimeAPI.ApiId}/*
+          - Effect: Allow
+            Action:
+              - appsync:Invoke
+            Resource:
+              - !Sub arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:/v1/apis/${RealtimeAPI.ApiId}/types/Mutation/fields/createWorkout
+          - Effect: Allow
+            Action:
+              - cognito-idp:List*
+            Resource:
+              - !Sub arn:aws:cognito-idp:${AWS::Region}:${AWS::AccountId}:userpool/*
+          - Effect: Allow
+            Action:
+              - logs:FilterLogEvents
+            Resource:
+              - !Sub arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/appsync/apis/${RealtimeAPI.ApiId}:*
 
-  23For23Developers:
+  TMFAppDevelopers:
     Type: AWS::IAM::Group
     Properties:
-      GroupName: 23For23-Developers
+      GroupName: TMF-App-Developers
       ManagedPolicyArns:
-        - !Ref 23For23DeveloperPolicy
+        - !Ref TMFAppDeveloperPolicy

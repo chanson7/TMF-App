@@ -1,9 +1,9 @@
 <a id="readme-top"></a>
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 
-# TMF | 23 for 23 Mobile App
+# TMF | Mobile App Back End Services
 
-This project contains all required configuration, code, & assets used in the "23 For 23" mobile application supporting the [Theodore Madison Foundation][tmf-url].
+This project contains configuration of the back-end services supporting the [Theodore Madison Foundation's][tmf-url] mobile application.
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -78,7 +78,7 @@ An [AWS account][aws-new-account-url] is required in order to run the necessary 
 ### Testing with Postman
 
 1. After successful deployment, import the [Postman Collection][postman-collection-url] json file into Postman
-2. Within the imported `TMF 23 For 23 App` collection, populate values for the following environment variables:
+2. Within the imported `TMF App` collection, populate values for the following environment variables:
 * `testUserEmail` any email address that you have access to
 * `testUserPassword` any password that fits the requirements defined in the [SAM Template][sam-template-url]
 * `awsRegion` must be the region in which the SAM app was deployed
@@ -100,6 +100,6 @@ An [AWS account][aws-new-account-url] is required in order to run the necessary 
 [sam-cli-url]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html
 [tmf-url]: https://theodoremadisonfoundation.org/
 
-[postman-collection-url]: https://github.com/chanson7/TMF-App/blob/main/TMF_23For23.postman_collection.json
+[postman-collection-url]: https://github.com/chanson7/TMF-App/blob/main/TMF_App.postman_collection.json
 [sam-template-url]: https://github.com/chanson7/TMF-App/blob/main/template.yaml
-[architecture-diagram-url]: https://github.com/chanson7/TMF-App/blob/main/TMF_23For23_Architecture.drawio.svg
+[architecture-diagram-url]: https://github.com/chanson7/TMF-App/blob/main/TMF_App_Architecture.drawio.svg
