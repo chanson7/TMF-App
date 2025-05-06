@@ -1,9 +1,9 @@
 <a id="readme-top"></a>
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 
-# TMF | Mobile App Back End Services
+# TMF | Mobile App
 
-This project contains configuration of back end services used by the [Theodore Madison Foundation][tmf-url] Mobile Application.
+This project contains all code and configuration used by the [Theodore Madison Foundation][tmf-url] Mobile Application.
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
@@ -21,6 +21,8 @@ This project contains configuration of back end services used by the [Theodore M
 
 [![aws]][aws-url]
 [![graphql]][graphql-url]
+[![react-native]][react-native-url]
+[![expo]][expo-url]
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -50,6 +52,27 @@ You Install the [SAM CLI][sam-cli-url]
    sam deploy --guided
    ```
 
+## Starting the Mobile App
+
+1. Install dependencies
+
+   ```bash
+   npm install
+   ```
+
+2. Start the app
+
+   ```bash
+   npx expo start
+   ```
+
+In the output, you'll find options to open the app in a
+
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go)
+
 ### Testing with Postman
 
 1. After successful deployment, import the [Postman Collection][postman-collection-url] json file into Postman
@@ -70,8 +93,12 @@ You Install the [SAM CLI][sam-cli-url]
 [aws-pricing-url]: https://aws.amazon.com/pricing/
 [aws-app-clients-url]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html
 [aws-user-pool-url]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools.html
+[expo]: https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white
+[expo-url]: https://expo.dev
 [graphql]: https://img.shields.io/badge/GraphQl-E10098?style=for-the-badge&logo=graphql&logoColor=white
 [graphql-url]: https://graphql.org/
+[react-native]: https://img.shields.io/badge/reactnative-3DDC84?style=for-the-badge&logo=react&logoColor=white
+[react-native-url]: https://reactnative.dev/
 [sam-cli-url]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html
 [tmf-url]: https://theodoremadisonfoundation.org/
 
