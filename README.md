@@ -25,7 +25,7 @@ This project contains all code and configuration used by the [Theodore Madison F
 [![expo]][expo-url]
 
 <!-- GETTING STARTED -->
-## Getting Started
+### Getting Started
 
 An [AWS account][aws-new-account-url] is required in order to run the necessary services for this application.
 
@@ -33,7 +33,7 @@ An [AWS account][aws-new-account-url] is required in order to run the necessary 
 
 You Install the [SAM CLI][sam-cli-url]
 
-### Deploying AWS Services
+## Deploying AWS Services
 1. Validate the SAM Template
 
    ```bash
