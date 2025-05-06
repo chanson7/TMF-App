@@ -3,9 +3,8 @@
 
 # TMF | Mobile App
 
-This project contains all code and configuration used by the [Theodore Madison Foundation][tmf-url] Mobile Application.
+This project contains all code and configuration used by the [Theodore Madison Foundation][tmf-url] Mobile Application.  It is composed of a back-end folder containing configuration of cloud services built with an AWS SAM template.
 
-<!-- ABOUT THE PROJECT -->
 ## About The Project
 
 ### Architecture Diagram
@@ -21,10 +20,9 @@ This project contains all code and configuration used by the [Theodore Madison F
 
 [![aws]][aws-url]
 [![graphql]][graphql-url]
-[![react-native]][react-native-url]
 [![expo]][expo-url]
+[![react-native]][react-native-url]
 
-<!-- GETTING STARTED -->
 ### Getting Started
 
 An [AWS account][aws-new-account-url] is required in order to run the necessary services for this application.
